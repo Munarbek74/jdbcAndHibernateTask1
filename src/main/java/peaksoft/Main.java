@@ -1,21 +1,24 @@
 package peaksoft;
 
 
+import peaksoft.dao.UserDaoJdbcImpl;
 import peaksoft.service.UserService;
 import peaksoft.service.UserServiceImpl;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
     static Scanner scannerN = new Scanner(System.in);
     static Scanner scannerS = new Scanner(System.in);
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         // реализуйте алгоритм здесь
             UserService userService = new UserServiceImpl();
             commands();
             while (true) {
                 int a = getButton();
                 if (a == 1) {
+
                     userService.createUsersTable();
                 } else if (a == 2) {
                     userService.dropUsersTable();

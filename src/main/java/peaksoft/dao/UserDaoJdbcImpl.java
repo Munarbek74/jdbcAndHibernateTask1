@@ -13,15 +13,17 @@ public class UserDaoJdbcImpl implements UserDao {
     public UserDaoJdbcImpl() {
     }
 
-    public void createUsersTable() {
-        String sql = "create table users (id serial primary key, name varchar(50) not null, last_name varchar(50) not null, age int not null);";
-        try (Statement statement = connection.createStatement()) {
-            statement.execute(sql);
-            System.out.println("Таблица базы данных успешно создана");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+    public void createUsersTable()  {
+            String sql = "create table IF NOT EXISTS users (id serial primary key, name varchar(50) not null, last_name varchar(50) not null, age int not null);";
+            try (Statement statement = connection.createStatement()) {
+                statement.execute(sql);
+
+                System.out.println("Таблица базы данных успешно создана");
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         }
-    }
+
 
     public void dropUsersTable() {
         String sql = "drop table users;";
